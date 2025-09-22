@@ -1,0 +1,24 @@
+import express from 'express';
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
+
+
+
+const app = express();
+
+dotenv.config();
+
+const connectDB = async () => {
+    try {
+        await mongoose.connect(process.env.MONGODB);
+        console.log('Connected to MongoDB');
+    } catch (error) {
+        throw error;
+    }
+};
+
+
+app.listen(8800, () => {
+    connectDB();
+    console.log('connected to backend!');
+});
