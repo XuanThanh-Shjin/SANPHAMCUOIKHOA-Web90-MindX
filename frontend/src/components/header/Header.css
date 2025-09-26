@@ -15,6 +15,9 @@
     max-width: 1024px;
     margin: 20px 0px 100px 0px;
 }
+.HeaderContainer.listMode {
+    margin: 20px 0px 10px 0px;
+}
 .HeaderList {
     display: flex;
     gap: 40px;
@@ -113,7 +116,7 @@
     cursor: not-allowed;
 }
 .HeaderSearchBtn {
-    background-color: #f00505;
+    background-color: #0520f0;
     color: white;
     border: none;
     padding: 10px 20px;

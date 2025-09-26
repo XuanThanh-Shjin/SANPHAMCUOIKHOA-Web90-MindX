@@ -59,6 +59,8 @@ const Header = ({ type }) => {
               <span>Khám phá</span>
           </div>
         </div>
+        { type !== "List" &&
+          <>
         <h1 className="HeaderTitle">Thoả sức du lịch</h1>
         <p className="HeaderDesc">Khám phá, lựa chọn và đặt chỗ khách sạn phù hợp nhất cho chuyến đi của bạn</p>
         <button className="HeaderBtn">Đăng ký / Đăng nhập</button>
@@ -154,6 +156,7 @@ const Header = ({ type }) => {
             <button className="HeaderSearchBtn">Tìm kiếm</button>
           </div>
         </div>
+        </>}
       </div>
     </div>
   )
