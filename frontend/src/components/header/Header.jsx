@@ -9,6 +9,7 @@ import { format } from 'date-fns';
 
 const Header = ({ type }) => {
 
+  const [destination, setDestination] = useState("");
   const [openDate, setOpenDate] = useState(false);
   const [date, setDate] = useState([
     {
@@ -25,6 +26,9 @@ const Header = ({ type }) => {
     room: 1,
   });
 
+  const navigate = useNavigate();
+
+
   const handleOption = (name, operation) => {
     setOptions((prev) => {
       return {
@@ -32,6 +36,11 @@ const Header = ({ type }) => {
         [name]: operation === "increase" ? options[name] + 1 : options[name] - 1,
       };
     });
+  };
+
+
+  const handleSearch = () => {
+    navigate("/hotels", {state:{destination, date, options}});
   };
 
   return (
@@ -67,19 +76,24 @@ const Header = ({ type }) => {
         <div className="HeaderSearch">
           <div className="HeaderSearchItems">
             <FontAwesomeIcon icon={faBed} className='HeaderIcon' />
-            <input type="text" placeholder='Bạn muốn đi đâu?' className='HeaderSearchInput' />
+            <input type="text" placeholder='Bạn muốn đi đâu?' 
+            className='HeaderSearchInput'
+            onChange={e=>setDestination(e.target.value)}
+            />
           </div>
           <div className="HeaderSearchItems">
             <FontAwesomeIcon icon={faCalendarDays} className='HeaderIcon' />
             <span onClick={() => setOpenDate(!openDate)} className='HeaderSearchText'>{`${format(date[0].startDate, 'MM/dd/yyyy')} to ${format(date[0].endDate, 'MM/dd/yyyy')}`}</span>
             {openDate && (<DateRange
-              className='HeaderDate'
+              // className='HeaderDate'
               editableDateInputs={true}
               onChange={item => setDate([item.selection])}
               moveRangeOnFirstSelection={false}
               ranges={date}
+              classNames="date"
               minDate={new Date()}
-            />)}
+            />
+            )}
           </div>
           <div className="HeaderSearchItems">
             <FontAwesomeIcon icon={faPerson} className='HeaderIcon' />
@@ -153,7 +167,7 @@ const Header = ({ type }) => {
             )}
           </div>
           <div className="HeaderSearchItems">
-            <button className="HeaderSearchBtn">Tìm kiếm</button>
+            <button className="HeaderSearchBtn" onClick={handleSearch}>Tìm kiếm</button>
           </div>
         </div>
         </>}
